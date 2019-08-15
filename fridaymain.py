@@ -41,8 +41,7 @@ def takecommand():
         #print("user said : ",query)
         #speak(query)
     
-    except Exception as e:
-        #print(e)
+    except Exception :
         print("Say that again please !! ")
         return "none"
     return query
@@ -65,23 +64,19 @@ if __name__ == "__main__":
             except :
                 speak("i did not get it.Try saying that again")
 
-        if "open youtube"  in query:
+        elif "open youtube"  in query:
             speak("opening youtube")
             webbrowser. get(chrome_path). open_new_tab("youtube.com")     
         
-        if "study time"  in query:
+        elif "study time"  in query:
             speak("starting lofi hiphop")
             webbrowser. get(chrome_path). open_new_tab("https://www.youtube.com/watch?v=hHW1oY26kxQ") 
 
-        if "github"  in query:
+        elif "github"  in query:
             speak("opening github")
             webbrowser. get(chrome_path). open_new_tab("https://github.com/") 
         
-        if "exit" in query:
-            speak("see you later")
-            exit()
-        
-        if "play music" in query: 
+        elif "play music" in query: 
             speak("playing music ")
             music_dir = "C:\\Users\\shikh\\Desktop\\music"
             songs = os.listdir(music_dir)
@@ -89,21 +84,31 @@ if __name__ == "__main__":
             num = random.randint(0,len(songs))
             os.startfile(os.path.join(music_dir,songs[num-1]))
         
-        if "the time" in query:
+        elif "the time" in query:
             strtime = datetime.datetime.now().strftime("%I%p")
             speak(f"It's  {strtime} ")
         
-        if "open code" in query :
+        elif "open code" in query :
             speak("opening visual studio code")
             codepath = "C:\\Users\\shikh\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codepath)    
 
-        if "open c plus plus" in query :
+        elif "open c plus plus" in query :
             speak("opening codeblocks")
             codepath = "C:\\Program Files (x86)\\CodeBlocks\\codeblocks.exe"
             os.startfile(codepath)    
         
-        if "open word" in query :
+        elif "open word" in query :
             speak("opening microsoft word")
             codepath = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
             os.startfile(codepath)  
+        
+        elif "google" in query:
+            query = query.replace("google search","")
+            speak ('searching on google.....')
+            url = "https://www.google.co.in/search?q=" +(str(query))+ "&oq="+(str(query))+"&gs_l=serp.12..0i71l8.0.0.0.6391.0.0.0.0.0.0.0.0..0.0....0...1c..64.serp..0.0.0.UiQhpfaBsuU"
+            webbrowser.open_new_tab(url)
+        
+        elif "exit" in query:
+            speak("see you later")
+            exit()
