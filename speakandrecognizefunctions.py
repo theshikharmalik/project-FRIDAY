@@ -26,7 +26,7 @@ def takecommand():
 
         except Exception as e:
             speak("I didnt get that !!")
-            #print("Exception !!" + str(e))
+            print("Exception !! call for friday again " + str(e))
             pass
 
     return said.lower()

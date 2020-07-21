@@ -6,6 +6,7 @@ import datetime
 import time
 import subprocess
 import speakandrecognizefunctions as SRF
+
 USER = "shikhar"
 
 
@@ -55,51 +56,40 @@ def wikipediasearch(query):
         SRF.speak("i did not get that !!")
 
 
-'''  
-        elif "open youtube" in query:
-            speak("opening youtube")
-            webbrowser. get(chrome_path). open_new_tab("youtube.com")
+def open_programs_websites(query):
+    chrome_path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe %s"
+    query = query.replace("open ", "")
 
-        elif "study time" in query:
-            speak("starting lofi hiphop")
-            webbrowser. get(chrome_path). open_new_tab(
-                "https://www.youtube.com/watch?v=hHW1oY26kxQ")
+    if "youtube" in query:
+        SRF.speak("opening youtube")
+        #webbrowser.get(chrome_path). open_new_tab("youtube.com")
+        webbrowser.open('http://youtube.com', new=2)
+        print("opened youtube")
 
-        elif "github" in query:
-            speak("opening github")
-            webbrowser. get(chrome_path). open_new_tab("https://github.com/")
+    elif "github" in query:
+        SRF.speak("opening github")
+        webbrowser. open_new_tab("https://github.com/")
 
-        elif "play music" in query:
-            speak("playing music ")
-            music_dir = "C:\\Users\\shikh\\Desktop\\music"
-            songs = os.listdir(music_dir)
+    elif "code" in query:
+        SRF.speak("opening visual studio code")
+        codepath = "C:\\Users\\shikh\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+        os.startfile(codepath)
 
-            num = random.randint(0, len(songs))
-            os.startfile(os.path.join(music_dir, songs[num-1]))
 
-        elif "the time" in query:
-            strtime = datetime.datetime.now().strftime("%I%p")
-            speak(f"It's  {strtime} ")
+def googlesearch(query):
+    SRF.speak('searching on google.....')
+    url = "https://www.google.co.in/search?q=" + (str(query)) + "&oq="+(str(
+        query))+"&gs_l=serp.12..0i71l8.0.0.0.6391.0.0.0.0.0.0.0.0..0.0....0...1c..64.serp..0.0.0.UiQhpfaBsuU"
+    webbrowser.open_new_tab(url)
 
-        elif "open code" in query:
-            speak("opening visual studio code")
-            codepath = "C:\\Users\\shikh\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
-            os.startfile(codepath)
 
-        elif "open c plus plus" in query:
-            speak("opening codeblocks")
-            codepath = "C:\\Program Files (x86)\\CodeBlocks\\codeblocks.exe"
-            os.startfile(codepath)
+def playmusic():
+    SRF.speak("playing music ")
+    try:
+        os.mkdir("music_folder")
+    except FileExistsError:
+        pass
+    songs = os.listdir("music_folder")
 
-        elif "open word" in query:
-            speak("opening microsoft word")
-            codepath = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
-            os.startfile(codepath)
-
-        elif "google" in query:
-            query = query.replace("google search", "")
-            speak('searching on google.....')
-            url = "https://www.google.co.in/search?q=" + (str(query)) + "&oq="+(str(
-                query))+"&gs_l=serp.12..0i71l8.0.0.0.6391.0.0.0.0.0.0.0.0..0.0....0...1c..64.serp..0.0.0.UiQhpfaBsuU"
-            webbrowser.open_new_tab(url)
-'''
+    num = random.randint(0, len(songs))
+    os.startfile(os.path.join("music_folder", songs[num-1]))
